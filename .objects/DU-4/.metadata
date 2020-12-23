@@ -1,0 +1,11 @@
+﻿{
+  "Id": "DU-4wtyHVU-zJhnDe2QKfQ",
+  "Reference": "Fmf6oYpSrEq1AgdkdvDfew/DU-4wtyHVU-zJhnDe2QKfQ",
+  "Name": "Edge: Zoho Accounts app",
+  "Type": "App",
+  "Created": "2020-12-22T15:15:52.4360699Z",
+  "CreatedBy": [
+    "UiPath.Platform, Version=20.10.4.0, Culture=neutral, PublicKeyToken=null"
+  ],
+  "Updated": "2020-12-22T15:15:52.4360699Z"
+}
