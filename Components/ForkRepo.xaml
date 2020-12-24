@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Github Organization to be forked to." Name="in_OrganizationName" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Repository to be forked.&#xA;" Name="in_Browser" Type="InArgument(ui:UiElement)" />
+    <x:Property sap2010:Annotation.AnnotationText="Represents the relative name of the repository (without the owner/org) to verify the repository found." Name="in_RepoName" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1002,1190</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>752,1200</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ForkRepo_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="52">
@@ -75,22 +76,23 @@
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Forks a Github Repository to the specified Organization. Takes in the organization name from the dispatcher prompt as well as the previously opened browser to fork the current repository into the organization. " DisplayName="ForkRepo" sap:VirtualizedContainerService.HintSize="739,1085" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Forks a Github Repository to the specified Organization. Takes in the organization name from the dispatcher prompt as well as the previously opened browser to fork the current repository into the organization. " DisplayName="ForkRepo" sap:VirtualizedContainerService.HintSize="736,1095.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use the opened browser that is already on the repository to fork" sap:VirtualizedContainerService.HintSize="697,951" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[in_Browser]" InteractionMode="Simulate" Version="V1">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use the opened browser that is already on the repository to fork" sap:VirtualizedContainerService.HintSize="694.4,958.4" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[in_Browser]" InteractionMode="Simulate" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Check if the repository exists" sap:VirtualizedContainerService.HintSize="663,735" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Check if the repository exists" sap:VirtualizedContainerService.HintSize="660.8,741.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="FoundName" />
             </Sequence.Variables>
@@ -99,9 +101,9 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:UiElementExists DisplayName="Attempt to find a repository name" Exists="[FoundName]" sap:VirtualizedContainerService.HintSize="621,106" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+            <ui:UiElementExists DisplayName="Attempt to find a repository name" Exists="[FoundName]" sap:VirtualizedContainerService.HintSize="619.2,107.2" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9d1176fd-ebeb-4ff8-ade8-957a6fd7cc45" InformativeScreenshot="8f7d9d709e95ba7a046b459563f6831a" Selector="&lt;webctrl aaname='TestRepo1' parentid='js-repo-pjax-container' tag='A' /&gt;">
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9d1176fd-ebeb-4ff8-ade8-957a6fd7cc45" InformativeScreenshot="4c1ba20956237a21bf3a98da1c970644" Selector="&lt;webctrl parentid='js-repo-pjax-container' tag='STRONG' innertext='*{{in_RepoName}}*' /&gt;">
                   <ui:Target.TimeoutMS>
                     <InArgument x:TypeArguments="x:Int32" />
                   </ui:Target.TimeoutMS>
@@ -111,15 +113,15 @@
                 </ui:Target>
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
-            <If Condition="[FoundName = True]" DisplayName="Check if the repository name exists within the page" sap:VirtualizedContainerService.HintSize="621,495" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[FoundName = True]" DisplayName="Check if the repository name exists within the page" sap:VirtualizedContainerService.HintSize="619.2,500" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence DisplayName="Attempt to fork the repository" sap:VirtualizedContainerService.HintSize="376,346" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Attempt to fork the repository" sap:VirtualizedContainerService.HintSize="375.2,348.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click - Fork Button" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click - Fork Button" sap:VirtualizedContainerService.HintSize="333.6,107.2" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
                     <ui:Click.CursorPosition>
                       <ui:CursorPosition Position="Center">
                         <ui:CursorPosition.OffsetX>
@@ -131,7 +133,7 @@
                       </ui:CursorPosition>
                     </ui:Click.CursorPosition>
                     <ui:Click.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ae0314fa-7061-4432-aef0-27853d156a40" InformativeScreenshot="ebebc38d7c8cb71d746d494b37b65393" Selector="&lt;html app='msedge.exe' idx='2' /&gt;&lt;webctrl parentid='js-repo-pjax-container' aaname='                                          Fork                   ' innertext='                                          Fork                   ' /&gt;">
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ae0314fa-7061-4432-aef0-27853d156a40" InformativeScreenshot="ebebc38d7c8cb71d746d494b37b65393" Selector="&lt;webctrl aria-role='button' parentid='js-repo-pjax-container' tag='SUMMARY' aaname='*Fork *' /&gt;">
                         <ui:Target.TimeoutMS>
                           <InArgument x:TypeArguments="x:Int32" />
                         </ui:Target.TimeoutMS>
@@ -141,7 +143,7 @@
                       </ui:Target>
                     </ui:Click.Target>
                   </ui:Click>
-                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click - Organization to fork to" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click - Organization to fork to" sap:VirtualizedContainerService.HintSize="333.6,107.2" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
                     <ui:Click.CursorPosition>
                       <ui:CursorPosition Position="Center">
                         <ui:CursorPosition.OffsetX>
@@ -153,7 +155,7 @@
                       </ui:CursorPosition>
                     </ui:Click.CursorPosition>
                     <ui:Click.Target>
-                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f69e36ca-5675-41f9-9260-9fb098feb8b0" InformativeScreenshot="9a41b708130920ce6053d6048d0b568e" Selector="&lt;html app='msedge.exe' title='*/*' /&gt;&lt;webctrl aaname='                          forktestorg           ' parentid='js-repo-pjax-container' parentname='organization' tag='DIV' innertext='                          forktestorg           ' /&gt;">
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f69e36ca-5675-41f9-9260-9fb098feb8b0" InformativeScreenshot="9a41b708130920ce6053d6048d0b568e" Selector="&lt;webctrl aaname='*@{{in_OrganizationName}}*' parentid='js-repo-pjax-container' tag='IMG' /&gt;">
                         <ui:Target.TimeoutMS>
                           <InArgument x:TypeArguments="x:Int32" />
                         </ui:Target.TimeoutMS>
@@ -166,7 +168,7 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Throw DisplayName="Throw BRE &quot;Repo name not found&quot;" Exception="[new BusinessRuleException(&quot;Repo not found&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                <Throw DisplayName="Throw SelectorNotFound" Exception="[new SelectorNotFoundException(&quot;Repo not found&quot;)]" sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
               </If.Else>
             </If>
           </Sequence>
