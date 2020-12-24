@@ -3,6 +3,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(sd:DataRow)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property sap2010:Annotation.AnnotationText="Organization to fork the repository to. " Name="in_OrganizationName" Type="InArgument(x:String)" />
+    <x:Property Name="in_Browser" Type="InArgument(ui:UiElement)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -66,6 +67,7 @@
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="Navigates to the current repository to fork to and attempts to fork it to the organization specified before.  If a repository is not found, then a Business Rule Exception is thrown. It takes in the transaction item to create an UIElement to be passed around and processed as well as the organization name. &#xA;" DisplayName="Process" sap:VirtualizedContainerService.HintSize="420,468" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -81,14 +83,22 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Web_NavigateTo_Repository workflow" sap:VirtualizedContainerService.HintSize="378.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Github\GitHub_Web_NavigateTo_Repository.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_RepositoryURL">[in_TransactionItem("Repository URL").ToString]</InArgument>
-        <OutArgument x:TypeArguments="ui:UiElement" x:Key="out_RepoBrowser">[RepoBrowser]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_RepositoryURL">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransactionItem(&quot;Repository URL&quot;).ToString" />
+        </InArgument>
+        <InOutArgument x:TypeArguments="ui:UiElement" x:Key="io_Browser">
+          <mva:VisualBasicReference x:TypeArguments="ui:UiElement" ExpressionText="in_Browser" />
+        </InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ForkRepo workflow" sap:VirtualizedContainerService.HintSize="378.4,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\ForkRepo.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_OrganizationName">[in_OrganizationName]</InArgument>
-        <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Browser">[RepoBrowser]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_OrganizationName">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OrganizationName" />
+        </InArgument>
+        <InArgument x:TypeArguments="ui:UiElement" x:Key="in_Browser">
+          <mva:VisualBasicValue x:TypeArguments="ui:UiElement" ExpressionText="in_Browser" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
