@@ -18,6 +18,8 @@ To Clone: `git clone https://github.com/UiPath-Project3-1/uipath-automation-7.gi
 ## Usage
 - To run this project from UiPath Studio, follow these steps:
     - Open the **Main.xaml** and select *Run* from the **Debug File** drop down.
+    - Enter the organization name that you want the repositories to be forked to. 
+    - Select the excel file containing the list of repositories to fork.
 
 ## Contributors
 ### Team 2
