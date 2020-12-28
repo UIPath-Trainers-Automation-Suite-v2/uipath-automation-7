@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>806.666666666667,719.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1138.66666666667,866</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Dispatcher_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -66,7 +66,7 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This Dispatcher gets the name of the Github organization and the list of Repository URLs to fork. It will ask the User to input the name of the Github Organzation and store it in a string argument. It will also read an excel file containing the list of Repository URLs and output the URLs in a Datatable.&#xD;&#xA;&#xD;&#xA;Preconditions: When the user inputs the filepath, the filepath should not be surrounded by quotations marks. The Excel file containing the Repository URLs should have a header.&#xD;&#xA;" DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="376,614.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This Dispatcher gets the name of the Github organization and the list of Repository URLs to fork. It will ask the User to input the name of the Github Organzation and store it in a string argument. It will also read an excel file containing the list of Repository URLs and output the URLs in a Datatable.&#xA;&#xA;Preconditions: The Excel file containing the Repository URLs should have a header.&#xA;" DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="376,598" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>

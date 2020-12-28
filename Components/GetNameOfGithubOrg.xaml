@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>824,613.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1172,866</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetNameOfGithubOrg_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="21">
@@ -33,7 +33,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="16">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -50,16 +50,27 @@
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Prompts the User for the name of the Github Organization they wish to fork Repositories to in an Input Dialog activity. It outputs an argument with the Organization name." DisplayName="GetNameOfGithubOrg" sap:VirtualizedContainerService.HintSize="375.2,425.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Prompts the User for the name of the Github Organization they wish to fork Repositories to in an Input Dialog activity. It outputs an argument with the Organization name." DisplayName="GetNameOfGithubOrg" sap:VirtualizedContainerService.HintSize="376,564" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Asks User to input the name of the organization" DisplayName="Input Github Organization" sap:VirtualizedContainerService.HintSize="333.6,272.8" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please enter the name of the GitHub Organization you wish to fork the repositories to: " Title="GitHub Organization">
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Getting name of Organization to Fork&quot;]" />
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" sap2010:Annotation.AnnotationText="Asks User to input the name of the organization" DisplayName="Input Github Organization" sap:VirtualizedContainerService.HintSize="334,275.333333333333" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please enter the name of the GitHub Organization you wish to fork the repositories to: " Title="GitHub Organization">
       <ui:InputDialog.Result>
         <OutArgument x:TypeArguments="x:String">[out_OrganizationName]</OutArgument>
       </ui:InputDialog.Result>
