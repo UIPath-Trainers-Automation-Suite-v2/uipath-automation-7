@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-16"?>
-<TargetApp BrowserType="Edge" ContentHash="vLObps1sNUmKyFOlhL7qGw" Selector="&lt;html app='msedge.exe' title='Zoho Accounts'/&gt;" Url="https://accounts.zoho.com/signin?hide_signup=true&amp;stop_mredirect=true&amp;portal_id=694077659&amp;hide_secure=true&amp;hide_gsignup=true&amp;servicename=ZohoPulse&amp;serviceurl=https%3A%2F%2Fconnect.revature.net%2F" xmlns="http://schemas.uipath.com/workflow/activities/uix">
-  <imageRef attrName="IconBase64" xmlns="">0S5MxEXH3DkS1mA0ZEPQ0LQ</imageRef>
-  <imageRef attrName="InformativeScreenshot" originalValue="75a0f663851f088ed796e5a1c472dc44.png" xmlns="">0mupBr8cQl0Ov_bnc8J-lbQ</imageRef>
-</TargetApp>

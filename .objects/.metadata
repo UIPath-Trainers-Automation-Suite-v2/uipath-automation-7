@@ -1,39 +1,9 @@
 ﻿{
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "Id": "1sTgaNxYUkGnSqIdt3I2Xg",
+  "Id": "krcfZgZ6Fkm_EeCEktFsDA",
   "Type": "Library",
-  "Created": "2020-12-22T20:49:22.7562127Z",
+  "Created": "2020-12-28T20:33:21.8956464Z",
   "CreatedBy": [
     "UiPath.Platform, Version=20.10.4.0, Culture=neutral, PublicKeyToken=null"
   ],
-  "Updated": "2020-12-22T20:49:22.7562127Z"
-=======
-  "Id": "MeZBjxv8skSBSxy0V6DG-w",
-  "Type": "Library",
-  "Created": "2020-12-23T01:30:27.9965784Z",
-  "CreatedBy": [
-    "UiPath.Platform, Version=20.10.4.0, Culture=neutral, PublicKeyToken=null"
-  ],
-  "Updated": "2020-12-23T01:30:27.9965784Z"
->>>>>>> ForkRepo_KillAllProcesses
-=======
-  "Id": "s0XbzUGIxESY_qA1aUin8Q",
-  "Type": "Library",
-  "Created": "2020-12-22T20:49:14.6024032Z",
-  "CreatedBy": [
-    "UiPath.Platform, Version=20.10.4.0, Culture=neutral, PublicKeyToken=null"
-  ],
-  "Updated": "2020-12-22T20:49:14.6024032Z"
->>>>>>> ForkRepo_InitAllApplications
-=======
-  "Id": "zb6AtVyMLUq6pw8fwNv30Q",
-  "Type": "Library",
-  "Created": "2020-12-23T05:32:48.2126774Z",
-  "CreatedBy": [
-    "UiPath.Platform, Version=20.10.4.0, Culture=neutral, PublicKeyToken=null"
-  ],
-  "Updated": "2020-12-23T05:32:48.2126774Z"
->>>>>>> ForkRepo_Process
+  "Updated": "2020-12-28T20:33:21.8956464Z"
 }
