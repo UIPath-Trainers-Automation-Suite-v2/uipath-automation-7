@@ -1,14 +1,14 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="GitHub_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="io_Browser" Type="InOutArgument(ui:UiElement)" />
-    <x:Property Name="in_Password" Type="InArgument(ss:SecureString)" />
-    <x:Property Name="in_Username" Type="InArgument(x:String)" />
-    <x:Property Name="in_BrowserTab" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Contains the Browser instance " Name="io_Browser" Type="InOutArgument(ui:UiElement)" />
+    <x:Property sap2010:Annotation.AnnotationText="Contains the password for Github" Name="in_Password" Type="InArgument(ss:SecureString)" />
+    <x:Property sap2010:Annotation.AnnotationText="Contains the username for Github" Name="in_Username" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Contains URL for a new tab on Micrsoft Edge" Name="in_BrowserTab" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1256,1834.66666666667</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>608,1834.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GitHub_Login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -86,7 +86,7 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This Workflow will login to Github using acitvities in the Revature__Github_ActivityLibrary, on a MIcrosoft Edge Browser. If a User is already logged in, then log them out and login with the Credentials retrieved from GetAppCredentials. &#xA;&#xA;Possible Exceptions: &#xA;    Github_Web_Login Activity:&#xA;        - Throws an InvalidCredentialException if the username and password are invalid.&#xA;        - Throws a SelectorNotFoundException if an unsupported/unknown UI element appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="574.666666666667,1730" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This Workflow will login to Github using acitvities in the Revature__Github_ActivityLibrary, on a Microsoft Edge Browser. If a User is already logged in, then log them out and login with the Credentials retrieved from GetAppCredentials. &#xA;&#xA;Possible Exceptions: &#xA;    Github_Web_Login Activity:&#xA;        - Throws an InvalidCredentialException if the username and password are invalid.&#xA;        - Throws a SelectorNotFoundException if an unsupported/unknown UI element appears." DisplayName="GitHub_Login" sap:VirtualizedContainerService.HintSize="574.666666666667,1730" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -102,8 +102,8 @@
           </ActivityAction.Argument>
           <Sequence DisplayName="Login to Github" sap:VirtualizedContainerService.HintSize="498.666666666667,1109.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
-              <Variable x:TypeArguments="x:Boolean" Name="IsLoggedIn" />
-              <Variable x:TypeArguments="x:Boolean" Name="TwoFactorAuth" />
+              <Variable x:TypeArguments="x:Boolean" sap2010:Annotation.AnnotationText="Boolean to check if a user is already logged in to Github" Name="IsLoggedIn" />
+              <Variable x:TypeArguments="x:Boolean" sap2010:Annotation.AnnotationText="Boolean for whether 2 Factor Authentication is required" Name="TwoFactorAuth" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">

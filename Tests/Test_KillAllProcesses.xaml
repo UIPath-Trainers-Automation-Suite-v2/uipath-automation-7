@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Test_KillAllProcesses" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="824,737.6" sap2010:WorkflowViewState.IdRef="Test_KillAllProcesses_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Test_KillAllProcesses" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="760,630.666666666667" sap2010:WorkflowViewState.IdRef="Test_KillAllProcesses_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
       <x:String>System.Activities</x:String>
@@ -63,25 +63,20 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Test_KillAllProcesses" sap:VirtualizedContainerService.HintSize="475.2,632.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This Test Workflow tests the KillAllProcess workflow. It opens a Microsoft Edge Browser and checks if it successfully kills the Microsoft Edge process." DisplayName="Test_KillAllProcesses" sap:VirtualizedContainerService.HintSize="476,526" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Framework\InitAllSettings.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">Data\Config.xlsx</InArgument>
-        <InArgument x:TypeArguments="s:String[]" x:Key="in_ConfigSheets">[{"Settings","Constants"}]</InArgument>
-        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Edge: GitHub: Where the world builds software · GitHub" sap:VirtualizedContainerService.HintSize="433.6,232.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" Version="V1">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser - GitHub" sap:VirtualizedContainerService.HintSize="434,234.666666666667" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -93,7 +88,7 @@
         <uix:TargetApp BrowserType="Edge" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAANcSURBVFhHtVdLa1NBGI1vF75l5t48GmNNDRjQRXAfBBE3LoRuREFd6MadxY0gMT9AfAVX7sU/oLsquKiCqF0IRRAfUBdaNa1Ci7XxnOl3Y3LzJb3mxgOHJN/jfHe+mbkzSURFsVhcn7T2iG9tzTdmHJzyrJ0j+d3Z4GMMYyUtPnLG+BC+4xlTBxsRWWcOc0Xm35HP5zdApAr+UApEInOpQS2RjQYZ9YQm2g+pFbkbGWv3Yz4/akJxSE1qSxkdbuT/oXhAanfthMx5W9uR8Bq8B/uXVntEfkPuffB5q5011DUBR7U1kEx63jn6yuXyWs/zzmLLfXK+5e03CfHH4CN8fwX7d/qgMwPbhWArYlseD/QCshZ9Tcii61jtvu8flBCHojGbYNtXqVRWi6mJRqOxKp1O781ms9vF5IAH392hi1ptUwED93lbEJlMJksS0jdSqVRW02ZNF8BWwaC+ZNC+Uy4oBtCxo5o2WHfTxFen4nRtQgd2iU7fwLTshNZnrQZrs/01zQn7JdGIDSzKM11q1Ogc15yZTGZE8mMjl8tt02qwNh9gqsOB9nNVS/5AAM33HXVQO+H2dNhh7VvJGxhQ7Fm4DmvzyX52OIyZlbyBgYMK12FttTWOnmclNzawBjaizny4Bmzv+ABPww4SW+Sk5MdGj60+kUgac0N1Ys4GtRBR6IFWg7XVwyIgEsdEo29gIKc1bZK1E4VCYTN+zIadwiU8RLVUKq0TvcjggcUBQGMxpBlwloebC0bg7abD2mspzzshR6yzYRQfEFNJWXsYL6gdLknB8PDwVizeQzjGLyP/TVNToe95tyQN1zBj8iiw4BzGfGUhPh1EXoQTYXuiHccEctW3apioNT9k7R5JWwaMV1uC6jhEMNjMCOxtBwm6c0xSOoCTr9wa243spqT8Ba9JobbfpV0uKxdhu84bUq8rNqcnyO9K1OiqgcvDEIKmJXiRZ7m4IgN5vyRf4zRrSKiOtLUHGCgJixj9Q3AMW+Y8Pq+Mjo6ukVAVzJHcMKepLWG9wflHq14qIo2V/vch5nc4B1qTvJpJSDTINb0Ctr3D+V6XEBWIWQpikbsAVlfK6QluF+zZmxCsYyRzvKKLSwUKzjAOn7VBXmrclTx85dbA6UP3tsjPFZBI/AF57FPSbdtFuAAAAABJRU5ErkJggg==" InformativeScreenshot="362bbbe4ee00acced52c538015eb85b7.png" Selector="&lt;html app='msedge.exe' title='GitHub: Where the world builds software · GitHub'/&gt;" Url="https://github.com/" />
       </uix:NApplicationCard.TargetApp>
     </uix:NApplicationCard>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\KillAllProcesses.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke KillAllProcess Workflow" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\KillAllProcesses.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
       </ui:InvokeWorkflowFile.Arguments>

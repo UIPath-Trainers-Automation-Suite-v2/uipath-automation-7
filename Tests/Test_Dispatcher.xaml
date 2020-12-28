@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TestDispatcher" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="806.666666666667,735.333333333333" sap2010:WorkflowViewState.IdRef="TestDispatcher_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="TestDispatcher" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="695.333333333333,718.666666666667" sap2010:WorkflowViewState.IdRef="TestDispatcher_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
       <x:String>System.Activities</x:String>
@@ -57,7 +57,7 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This Test Workflow tests the Dispatcher workflow using sample data. It will prompt the user to enter a Github Organization and a filepath to an excel file containing the Repository URLs.&#xD;&#xA;&#xD;&#xA;Preconditions: When the user inputs the filepath, the filepath should not be surrounded by quotations marks. The Excel file containing the Repository URLs should have a header. " DisplayName="TestDispatcher" sap:VirtualizedContainerService.HintSize="376,630.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This Test Workflow tests the Dispatcher workflow using sample data. It will prompt the user to enter a Github Organization and a filepath to an excel file containing the Repository URLs.&#xA;&#xA;Preconditions: The Excel file containing the Repository URLs should have a header. " DisplayName="TestDispatcher" sap:VirtualizedContainerService.HintSize="376,614" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" sap2010:Annotation.AnnotationText="A Datatable that contains the Repository URLs from the local excel file" Name="repoDT" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Name of the Github Organization the User inputs" Name="orgName" />
@@ -70,12 +70,8 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Dispatcher Workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Dispatcher.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_RepoDT">
-          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="repoDT" />
-        </OutArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_OrgName">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="orgName" />
-        </OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_RepoDT">[repoDT]</OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_OrgName">[orgName]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <WriteLine sap2010:Annotation.AnnotationText="Check the name of the Github organization." DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,108" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;Github Organization: &quot; + orgName]">
