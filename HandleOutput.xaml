@@ -6,10 +6,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>966,1651.33333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1102,1992.66666666667</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>WriteOutput_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="44">
+    <scg:List x:TypeArguments="x:String" Capacity="27">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -40,7 +40,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="54">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -73,11 +73,12 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow represents what should be done at the end of the process, when all transactions have been handled or when the application is forced to close. &#xA;&#xA;This workflow is invoked in the End Process state of the Main.xaml workflow of the REFramework, in the finally block of the Try Catch. &#xA;&#xA;This outputs a message box notifying the users which repositories were successfully forked or failed to fork" DisplayName="Handle Output" sap:VirtualizedContainerService.HintSize="662.666666666667,1546.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow represents what should be done at the end of the process, when all transactions have been handled or when the application is forced to close. &#xA;&#xA;This workflow is invoked in the End Process state of the Main.xaml workflow of the REFramework, in the finally block of the Try Catch. &#xA;&#xA;This workflow outputs a message box notifying the users which repositories were successfully forked or failed to fork. It also creates an Excel file with the status of each transaction (success/failed). The GetOutputPath workflow gets the path to write the Excel file to, in the Documents folder, and the WriteTransactionReport workflow writes to that path." DisplayName="Handle Output" sap:VirtualizedContainerService.HintSize="662.666666666667,1888" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="successRepo" />
       <Variable x:TypeArguments="x:String" Name="failRepo" />
       <Variable x:TypeArguments="x:String" Name="outputString" />
+      <Variable x:TypeArguments="x:String" Name="reportFilepath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -167,5 +168,28 @@
       </If.Else>
     </If>
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box - outputString" sap:VirtualizedContainerService.HintSize="620.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[outputString]" />
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetOutputPath Workflow" sap:VirtualizedContainerService.HintSize="620.666666666667,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Components\Output\GetOutputPath.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_FilePath">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="reportFilepath" />
+        </OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke Workflow File" sap:VirtualizedContainerService.HintSize="620.666666666667,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\Output\WriteTransactionReport.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TransactionData">
+          <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="in_TransactionData" />
+        </InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="reportFilepath" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
