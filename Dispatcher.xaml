@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>806.666666666667,719.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>594,837.333333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Dispatcher_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -64,15 +64,20 @@
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This Dispatcher gets the name of the Github organization and the list of Repository URLs to fork. It will ask the User to input the name of the Github Organzation and store it in a string argument. It will also read an excel file containing the list of Repository URLs and output the URLs in a Datatable.&#xD;&#xA;&#xD;&#xA;Preconditions: When the user inputs the filepath, the filepath should not be surrounded by quotations marks. The Excel file containing the Repository URLs should have a header.&#xD;&#xA;" DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="376,614.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This Dispatcher gets the name of the Github organization and the list of Repository URLs to fork. It will ask the User to input the name of the Github Organzation and store it in a string argument. It will also read an excel file containing the list of Repository URLs and output the URLs in a Datatable.&#xA;&#xA;Preconditions: The Excel file containing the Repository URLs should have a header.&#xA;" DisplayName="Dispatcher" sap:VirtualizedContainerService.HintSize="376,732.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message - Retrieving Inputs" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Retrieving User Inputs&quot;]" />
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Outputs a String containing the name of the Guthub Organization." DisplayName="Invoke GetNameOfGithubOrg Workflow" sap:VirtualizedContainerService.HintSize="334,159.333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\GetNameOfGithubOrg.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="x:String" x:Key="out_OrganizationName">[out_OrgName]</OutArgument>
