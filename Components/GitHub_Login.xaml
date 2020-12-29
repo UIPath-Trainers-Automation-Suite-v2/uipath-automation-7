@@ -114,8 +114,8 @@
           </ActivityAction.Argument>
           <Sequence sap2010:Annotation.AnnotationText="Sequence to Login to Github." DisplayName="Login to Github" sap:VirtualizedContainerService.HintSize="498.666666666667,1363.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_29">
             <Sequence.Variables>
-              <Variable x:TypeArguments="x:Boolean" Name="IsLoggedIn" />
-              <Variable x:TypeArguments="x:Boolean" Name="TwoFactorAuth" />
+              <Variable x:TypeArguments="x:Boolean" sap2010:Annotation.AnnotationText="Boolean to check if a user is logged in on Github" Name="IsLoggedIn" />
+              <Variable x:TypeArguments="x:Boolean" sap2010:Annotation.AnnotationText="Boolean to check if two factor authentication is required" Name="TwoFactorAuth" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
