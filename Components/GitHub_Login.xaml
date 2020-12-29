@@ -95,6 +95,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This workflow opens a Microsoft Edge tab and navigates to Github. It checks if a user is logged in and logs them out if they are. Using Credentials retrieved from Windows Credentials Manager (in the GetAppCredentials workflow), it logs in the user and pauses the exection if two factor authenitcation is required.&#xD;&#xA;&#xD;&#xA;Possible Exceptions: &#xD;&#xA;    GitHub_Web_Login Activity:&#xA;        Throws an InvalidCredentialException if the username and password are invalid.&#xA;        Throws a SelectorNotFoundException if an unsupported/unknown UI element appears." DisplayName="Github_Login" sap:VirtualizedContainerService.HintSize="574.666666666667,2000.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_30">
@@ -104,7 +105,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Logging in to Github&quot;]" />
+    <ui:LogMessage DisplayName="Log Message - Logging into Github" sap:VirtualizedContainerService.HintSize="532.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Logging into Github&quot;]" />
     <uix:NApplicationCard sap2010:Annotation.AnnotationText="Opens a new tab in Microsoft Edge." AttachMode="ByInstance" DisplayName="Use Browser - New tab" sap:VirtualizedContainerService.HintSize="532.666666666667,1612" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="Simulate" OutUiElement="[io_Browser]" Version="V1">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -122,7 +123,7 @@
                 <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ra:GitHub_Web_CheckIfLoggedIn sap2010:Annotation.AnnotationText="Navigated to Github and checks if a user is already logged in." sap:VirtualizedContainerService.HintSize="456.666666666667,84" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_2" in_Browser="[io_Browser]" out_IsLoggedIn="[IsLoggedIn]">
+            <ra:GitHub_Web_CheckIfLoggedIn sap2010:Annotation.AnnotationText="Navigates to Github and checks if a user is already logged in." sap:VirtualizedContainerService.HintSize="456.666666666667,84" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_2" in_Browser="[io_Browser]" out_IsLoggedIn="[IsLoggedIn]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
