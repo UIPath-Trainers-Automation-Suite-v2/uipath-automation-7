@@ -14,7 +14,7 @@ This process will take in as input the name of a Github Organization and an exce
 ## Getting Started
 To Clone: `git clone https://github.com/UiPath-Project3-1/uipath-automation-7.git`
 - You will need a valid GitHub account for the robot to login to and access the organization with.
-- You will need an **xlsx** or **csv** file which contains one column with the header *Repository URL*. The values in the *Repository URL* column should be the URLs of the repositories you wish to fork.
+- You will need an **xlsx** or **csv** file which contains one column with the header *Repository URL* or no header at all. The values in the *Repository URL* column should be the URLs of the repositories you wish to fork.
 
 ## Usage
 - To run this project from UiPath Studio, follow these steps:
