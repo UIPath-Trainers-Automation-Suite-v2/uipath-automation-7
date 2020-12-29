@@ -81,23 +81,36 @@
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="out_Config">[Config]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:ReadRange AddHeaders="True" DataTable="[TransactionData]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="Tests\ForkRepos_TestData.xlsx">
+    <ui:ReadRange AddHeaders="True" DataTable="[TransactionData]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="333.6,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="Tests\ForkRepos_TestData.xlsx">
       <ui:ReadRange.Range>
         <InArgument x:TypeArguments="x:String">
           <Literal x:TypeArguments="x:String" Value="" />
         </InArgument>
       </ui:ReadRange.Range>
     </ui:ReadRange>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetTransactionData workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\GetTransactionData.xaml">
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GetTransactionData workflow" sap:VirtualizedContainerService.HintSize="333.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Framework\GetTransactionData.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:Int32" x:Key="in_TransactionNumber">0</InArgument>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InArgument>
-        <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_TransactionItem">[TransactionItem]</OutArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_TransactionID">[TransactionID]</OutArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_TransactionField">[TransactionField]</OutArgument>
-        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_TransactionData">[TransactionData]</InArgument>
+        <InArgument x:TypeArguments="x:Int32" x:Key="in_TransactionNumber">
+          <Literal x:TypeArguments="x:Int32" Value="1" />
+        </InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+        </InArgument>
+        <OutArgument x:TypeArguments="sd:DataRow" x:Key="out_TransactionItem">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataRow" ExpressionText="TransactionItem" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_TransactionID">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="TransactionID" />
+        </OutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_TransactionData">
+          <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="TransactionData" />
+        </InOutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_TransactionField1">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="TransactionField" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_TransactionField2" />
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Repo URL: &quot;+TransactionField]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="333.6,92.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Repo URL: &quot;+TransactionField]" />
   </Sequence>
 </Activity>

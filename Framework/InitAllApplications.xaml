@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>641.333333333333,761.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>740.8,628.8</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="37">
@@ -119,10 +119,18 @@
     </ui:InvokeWorkflowFile>
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke GitHub_Login workflow" sap:VirtualizedContainerService.HintSize="334,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\GitHub_Login.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InOutArgument x:TypeArguments="ui:UiElement" x:Key="io_Browser">[out_Browser]</InOutArgument>
-        <InArgument x:TypeArguments="ss:SecureString" x:Key="in_Password">[Password]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Username">[Username]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_BrowserTab">[in_Config("MicrosoftEdgeNewTab").ToString]</InArgument>
+        <InOutArgument x:TypeArguments="ui:UiElement" x:Key="io_Browser">
+          <mva:VisualBasicReference x:TypeArguments="ui:UiElement" ExpressionText="out_Browser" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="ss:SecureString" x:Key="in_Password">
+          <mva:VisualBasicValue x:TypeArguments="ss:SecureString" ExpressionText="Password" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Username">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Username" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Credential">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_Config(&quot;GitHubCredential&quot;).ToString()" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
