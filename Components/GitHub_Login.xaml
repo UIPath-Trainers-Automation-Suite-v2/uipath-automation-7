@@ -1,11 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="GitHub_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ssa="clr-namespace:System.Security.Authentication;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="GitHub_Login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ra="clr-namespace:Revature_GitHub_ActivityLibrary.Authentication;assembly=Revature_GitHub_ActivityLibrary" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:ssa="clr-namespace:System.Security.Authentication;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="UiElement to store the webpage." Name="io_Browser" Type="InOutArgument(ui:UiElement)" />
     <x:Property sap2010:Annotation.AnnotationText="GitHub user login password." Name="in_Password" Type="InArgument(ss:SecureString)" />
     <x:Property sap2010:Annotation.AnnotationText="GitHub user login username." Name="in_Username" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Name of the credential to be retrieved." Name="in_Credential" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Contains URL for a Microsoft Edge tab" Name="in_BrowserTab" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>740.8,2029.6</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>966,2105.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="54">
@@ -94,143 +95,165 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <uix:NApplicationCard sap2010:Annotation.AnnotationText="Opens a new tab in Microsoft Edge." AttachMode="ByInstance" DisplayName="Use Browser - New tab" sap:VirtualizedContainerService.HintSize="540,1964.8" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="Simulate" OutUiElement="[io_Browser]" Version="V1">
-    <uix:NApplicationCard.Body>
-      <ActivityAction x:TypeArguments="x:Object">
-        <ActivityAction.Argument>
-          <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
-        </ActivityAction.Argument>
-        <Sequence sap2010:Annotation.AnnotationText="Sequence to Login to Github." DisplayName="Login to Github" sap:VirtualizedContainerService.HintSize="506.4,1716.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
-          <Sequence.Variables>
-            <Variable x:TypeArguments="x:Boolean" Name="IsLoggedIn" />
-            <Variable x:TypeArguments="x:Boolean" Name="TwoFactorAuth" />
-          </Sequence.Variables>
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ra:GitHub_Web_CheckIfLoggedIn sap:VirtualizedContainerService.HintSize="464.8,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_1" in_Browser="[io_Browser]" out_IsLoggedIn="[IsLoggedIn]" />
-          <If sap2010:Annotation.AnnotationText="Checks to see whether the user is signed in already. If they are, log them out." Condition="[IsLoggedIn]" DisplayName="If - User Is Logged In" sap:VirtualizedContainerService.HintSize="464.8,112.8" sap2010:WorkflowViewState.IdRef="If_1">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <If.Then>
-              <ra:GitHub_Web_Logout sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Logout_2" in_Browser="[io_Browser]" />
-            </If.Then>
-          </If>
-          <TryCatch DisplayName="Try GitHub Login Catch InvalidCredentialException" sap:VirtualizedContainerService.HintSize="464.8,755.2" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-            <TryCatch.Try>
-              <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_3" in_Browser="[io_Browser]" in_Password="[in_Password]" in_Username="[in_Username]" out_2FADidAppear="[TwoFactorAuth]" />
-            </TryCatch.Try>
-            <TryCatch.Catches>
-              <Catch x:TypeArguments="ssa:InvalidCredentialException" sap:VirtualizedContainerService.HintSize="431.2,590.4" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ActivityAction x:TypeArguments="ssa:InvalidCredentialException">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="ssa:InvalidCredentialException" Name="exception" />
-                  </ActivityAction.Argument>
-                  <ui:RetryScope sap2010:Annotation.AnnotationText="Retry logging in with new credentials until no exceptions are thrown." DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="424.8,520" sap2010:WorkflowViewState.IdRef="RetryScope_1">
-                    <ui:RetryScope.ActivityBody>
-                      <ActivityAction>
-                        <Sequence sap2010:Annotation.AnnotationText="The credential in Windows Credentials Manager is deleted and the user is prompted for new credential." DisplayName="Login with new credentials" sap:VirtualizedContainerService.HintSize="383.2,312.8" sap2010:WorkflowViewState.IdRef="Sequence_25">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ReplaceInvalidCredentials workflow" sap:VirtualizedContainerService.HintSize="341.6,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Components\ReplaceInvalidCredentials.xaml">
-                            <ui:InvokeWorkflowFile.Arguments>
-                              <InOutArgument x:TypeArguments="ss:SecureString" x:Key="io_Password">[in_Password]</InOutArgument>
-                              <InOutArgument x:TypeArguments="x:String" x:Key="io_Username">[in_Username]</InOutArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Credential]</InArgument>
-                            </ui:InvokeWorkflowFile.Arguments>
-                          </ui:InvokeWorkflowFile>
-                          <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="341.6,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_4" in_Browser="[io_Browser]" in_Password="[in_Password]" in_Username="[in_Username]" out_2FADidAppear="[TwoFactorAuth]" />
-                        </Sequence>
-                      </ActivityAction>
-                    </ui:RetryScope.ActivityBody>
-                    <ui:RetryScope.Condition>
-                      <ActivityFunc x:TypeArguments="x:Boolean" />
-                    </ui:RetryScope.Condition>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </ui:RetryScope>
-                </ActivityAction>
-              </Catch>
-            </TryCatch.Catches>
-          </TryCatch>
-          <ui:InterruptibleWhile DisplayName="Check For 2FA" sap:VirtualizedContainerService.HintSize="464.8,580.8" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
-            <ui:InterruptibleWhile.Body>
-              <uix:NCheckState sap2010:Annotation.AnnotationText="If 2FA elements exists, prompt user. If not, then continue." DisplayName="Check App State - 2FA Elements Exist" EnableIfNotExists="False" Exists="[TwoFactorAuth]" sap:VirtualizedContainerService.HintSize="418.4,413.6" sap2010:WorkflowViewState.IdRef="NCheckState_3" Timeout="20">
-                <uix:NCheckState.IfExists>
-                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="375.2,154.4" sap2010:WorkflowViewState.IdRef="Sequence_23">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box - User 2FA Prompt" sap:VirtualizedContainerService.HintSize="333.6,60" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;Please Input Your 2FA&quot;]" />
-                  </Sequence>
-                </uix:NCheckState.IfExists>
-                <uix:NCheckState.IfNotExists>
-                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="250,84" sap2010:WorkflowViewState.IdRef="Sequence_24">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </Sequence>
-                </uix:NCheckState.IfNotExists>
-                <uix:NCheckState.Target>
-                  <uix:TargetAnchorable BrowserURL="https://github.com/sessions/two-factor" DesignTimeRectangle="814, 184, 308, 36" FriendlyName="'Two-factor authenticati…'" FullSelectorArgument="&lt;webctrl tag='H1' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H1' type='' aaname='Two-factor authentication' check:text='Two-factor authentication' /&gt;" ImageBase64="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" InformativeScreenshot="83017a62672f3b8dc0d7844bb2dd8204.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='GitHub · Where software is built' /&gt;" SearchSteps="FuzzySelector" Text="Two-factor authentication" TextMethod="AttributeText" TextSelector="&lt;webctrl tag='H1' type='' /&gt;">
-                    <uix:TargetAnchorable.Anchors>
-                      <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                        <uix:Target DesignTimeRectangle="814, 236, 308, 154" FriendlyName="'Authentication code'" FullSelectorArgument="&lt;webctrl idx='5' parentid='login' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' parentid='login' tag='DIV' aaname='       ' check:text='Authentication code What’s this?&amp;#xA;      &amp;#xA;&amp;#xA;      &amp;#xA;&amp;#xA;      Verify' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector" Text="Authentication code What’s this?&#xA;      &#xA;&#xA;      &#xA;&#xA;      Verify" TextMethod="AttributeText" TextSelector="&lt;webctrl type='' tag='DIV' /&gt;" />
-                      </scg:List>
-                    </uix:TargetAnchorable.Anchors>
-                  </uix:TargetAnchorable>
-                </uix:NCheckState.Target>
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-              </uix:NCheckState>
-            </ui:InterruptibleWhile.Body>
-            <ui:InterruptibleWhile.Condition>
-              <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="TwoFactorAuth" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
-            </ui:InterruptibleWhile.Condition>
-          </ui:InterruptibleWhile>
-        </Sequence>
-      </ActivityAction>
-    </uix:NApplicationCard.Body>
-    <uix:NApplicationCard.TargetApp>
-      <uix:TargetApp BrowserType="Edge" IconBase64="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" InformativeScreenshot="cfe380ff3f7f6d624d5c8e4c5270ec8e.png" Selector="&lt;html app='msedge.exe' title='New tab'/&gt;" Url="edge://newtab/" />
-    </uix:NApplicationCard.TargetApp>
+  <Sequence sap2010:Annotation.AnnotationText="This workflow opens a Microsoft Edge tab and navigates to Github. It checks if a user is logged in and logs them out if they are. Using Credentials retrieved from Windows Credentials Manager (in the GetAppCredentials workflow), it logs in the user and pauses the exection if two factor authenitcation is required.&#xD;&#xA;&#xD;&#xA;Possible Exceptions: &#xD;&#xA;    GitHub_Web_Login Activity:&#xA;        Throws an InvalidCredentialException if the username and password are invalid.&#xA;        Throws a SelectorNotFoundException if an unsupported/unknown UI element appears." DisplayName="Github_Login" sap:VirtualizedContainerService.HintSize="574.666666666667,2000.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_30">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-  </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="532.666666666667,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Logging in to Github&quot;]" />
+    <uix:NApplicationCard sap2010:Annotation.AnnotationText="Opens a new tab in Microsoft Edge." AttachMode="ByInstance" DisplayName="Use Browser - New tab" sap:VirtualizedContainerService.HintSize="532.666666666667,1612" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="Simulate" OutUiElement="[io_Browser]" Version="V1">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence sap2010:Annotation.AnnotationText="Sequence to Login to Github." DisplayName="Login to Github" sap:VirtualizedContainerService.HintSize="498.666666666667,1363.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_29">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Boolean" Name="IsLoggedIn" />
+              <Variable x:TypeArguments="x:Boolean" Name="TwoFactorAuth" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ra:GitHub_Web_CheckIfLoggedIn sap2010:Annotation.AnnotationText="Navigated to Github and checks if a user is already logged in." sap:VirtualizedContainerService.HintSize="456.666666666667,84" sap2010:WorkflowViewState.IdRef="GitHub_Web_CheckIfLoggedIn_2" in_Browser="[io_Browser]" out_IsLoggedIn="[IsLoggedIn]">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ra:GitHub_Web_CheckIfLoggedIn>
+            <If sap2010:Annotation.AnnotationText="If a user is logged in, log them out." Condition="[IsLoggedIn]" DisplayName="If - User Is Logged In" sap:VirtualizedContainerService.HintSize="456.666666666667,98" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ra:GitHub_Web_Logout sap:VirtualizedContainerService.HintSize="200,22.4" sap2010:WorkflowViewState.IdRef="GitHub_Web_Logout_3" in_Browser="[io_Browser]" />
+              </If.Then>
+            </If>
+            <TryCatch DisplayName="Try GitHub Login Catch InvalidCredentialException" sap:VirtualizedContainerService.HintSize="456.666666666667,322" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <TryCatch.Try>
+                <ra:GitHub_Web_Login sap2010:Annotation.AnnotationText="Logs in to Github and checks if two factor authentication is required" sap:VirtualizedContainerService.HintSize="200,84" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_5" in_Browser="[io_Browser]" in_Password="[in_Password]" in_Username="[in_Username]" out_2FADidAppear="[TwoFactorAuth]">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ra:GitHub_Web_Login>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="ssa:InvalidCredentialException" sap:VirtualizedContainerService.HintSize="404.666666666667,22" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="ssa:InvalidCredentialException">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ssa:InvalidCredentialException" Name="exception" />
+                    </ActivityAction.Argument>
+                    <ui:RetryScope sap2010:Annotation.AnnotationText="Retry logging in with new credentials until no exceptions are thrown." DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="425.333333333333,521.333333333333" sap2010:WorkflowViewState.IdRef="RetryScope_2">
+                      <ui:RetryScope.ActivityBody>
+                        <ActivityAction>
+                          <Sequence sap2010:Annotation.AnnotationText="The credential in Windows Credentials Manager is deleted and the user is prompted for new credential." DisplayName="Login with new credentials" sap:VirtualizedContainerService.HintSize="383.333333333333,313.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ReplaceInvalidCredentials workflow" sap:VirtualizedContainerService.HintSize="341.333333333333,114" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Components\ReplaceInvalidCredentials.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="ss:SecureString" x:Key="io_Password">[in_Password]</InOutArgument>
+                                <InOutArgument x:TypeArguments="x:String" x:Key="io_Username">[in_Username]</InOutArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_Credential">[in_Credential]</InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                            <ra:GitHub_Web_Login sap:VirtualizedContainerService.HintSize="341.333333333333,22" sap2010:WorkflowViewState.IdRef="GitHub_Web_Login_6" in_Browser="[io_Browser]" in_Password="[in_Password]" in_Username="[in_Username]" out_2FADidAppear="[TwoFactorAuth]" />
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:RetryScope.ActivityBody>
+                      <ui:RetryScope.Condition>
+                        <ActivityFunc x:TypeArguments="x:Boolean" />
+                      </ui:RetryScope.Condition>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:RetryScope>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+            <ui:InterruptibleWhile sap2010:Annotation.AnnotationText="Pauses execeution until the user has handled two factor authentication." Condition="[TwoFactorAuth]" DisplayName="Check For 2FA" sap:VirtualizedContainerService.HintSize="456.666666666667,614" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+              <ui:InterruptibleWhile.Body>
+                <uix:NCheckState sap2010:Annotation.AnnotationText="If 2FA elements exists, prompt user. If not, then continue." DisplayName="Check App State - 2FA Elements Exist" EnableIfNotExists="False" Exists="[TwoFactorAuth]" sap:VirtualizedContainerService.HintSize="420,414" sap2010:WorkflowViewState.IdRef="NCheckState_4" Timeout="20">
+                  <uix:NCheckState.IfExists>
+                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="376,153.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box - User 2FA Prompt" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[&quot;Please Input Your 2FA&quot;]" />
+                    </Sequence>
+                  </uix:NCheckState.IfExists>
+                  <uix:NCheckState.IfNotExists>
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="250,84" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </uix:NCheckState.IfNotExists>
+                  <uix:NCheckState.Target>
+                    <uix:TargetAnchorable BrowserURL="https://github.com/sessions/two-factor" DesignTimeRectangle="814, 184, 308, 36" FriendlyName="'Two-factor authenticati…'" FullSelectorArgument="&lt;webctrl tag='H1' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='H1' type='' aaname='Two-factor authentication' check:text='Two-factor authentication' /&gt;" ImageBase64="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" InformativeScreenshot="83017a62672f3b8dc0d7844bb2dd8204.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='GitHub · Where software is built' /&gt;" SearchSteps="FuzzySelector" Text="Two-factor authentication" TextMethod="AttributeText" TextSelector="&lt;webctrl tag='H1' type='' /&gt;">
+                      <uix:TargetAnchorable.Anchors>
+                        <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                          <uix:Target DesignTimeRectangle="814, 236, 308, 154" FriendlyName="'Authentication code'" FullSelectorArgument="&lt;webctrl idx='5' parentid='login' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl type='' parentid='login' tag='DIV' aaname='       ' check:text='Authentication code What’s this?&amp;#xA;      &amp;#xA;&amp;#xA;      &amp;#xA;&amp;#xA;      Verify' /&gt;" ImageBase64="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" SearchSteps="FuzzySelector" Text="Authentication code What’s this?&#xA;      &#xA;&#xA;      &#xA;&#xA;      Verify" TextMethod="AttributeText" TextSelector="&lt;webctrl type='' tag='DIV' /&gt;" />
+                        </scg:List>
+                      </uix:TargetAnchorable.Anchors>
+                    </uix:TargetAnchorable>
+                  </uix:NCheckState.Target>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </uix:NCheckState>
+              </ui:InterruptibleWhile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleWhile>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp BrowserType="Edge" IconBase64="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" InformativeScreenshot="cfe380ff3f7f6d624d5c8e4c5270ec8e.png" Selector="&lt;html app='msedge.exe' title='New tab'/&gt;" Url="[in_BrowserTab]" />
+      </uix:NApplicationCard.TargetApp>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </uix:NApplicationCard>
+  </Sequence>
 </Activity>
