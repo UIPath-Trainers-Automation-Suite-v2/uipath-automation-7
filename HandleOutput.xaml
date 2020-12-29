@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>952,958</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>966,1651.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>WriteOutput_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="44">
@@ -69,14 +69,15 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This workflow represents what should be done at the end of the process, when all transactions have been handled or when the application is forced to close. &#xA;&#xA;This workflow is invoked in the End Process state of the Main.xaml workflow of the REFramework, in the finally block of the Try Catch. &#xA;&#xA;This outputs a message box notifying the users which repositories were successfully forked or failed to fork" DisplayName="Handle Output" sap:VirtualizedContainerService.HintSize="662.666666666667,853.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This workflow represents what should be done at the end of the process, when all transactions have been handled or when the application is forced to close. &#xA;&#xA;This workflow is invoked in the End Process state of the Main.xaml workflow of the REFramework, in the finally block of the Try Catch. &#xA;&#xA;This outputs a message box notifying the users which repositories were successfully forked or failed to fork" DisplayName="Handle Output" sap:VirtualizedContainerService.HintSize="662.666666666667,1546.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="successRepo" />
       <Variable x:TypeArguments="x:String" Name="failRepo" />
+      <Variable x:TypeArguments="x:String" Name="outputString" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -103,7 +104,7 @@
                   <OutArgument x:TypeArguments="x:String">[failRepo]</OutArgument>
                 </Assign.To>
                 <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[failRepo+ vbCrLf +row("Repository URL").ToString.Split("/"C).Last]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[failRepo +row("Repository URL").ToString.Split("/"C).Last + vbCrLf]</InArgument>
                 </Assign.Value>
               </Assign>
             </If.Then>
@@ -113,7 +114,7 @@
                   <OutArgument x:TypeArguments="x:String">[successRepo]</OutArgument>
                 </Assign.To>
                 <Assign.Value>
-                  <InArgument x:TypeArguments="x:String">[successRepo + vbCrLf + row("Repository URL").ToString.Split("/"C).Last]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[successRepo + row("Repository URL").ToString.Split("/"C).Last + vbCrLf]</InArgument>
                 </Assign.Value>
               </Assign>
             </If.Else>
@@ -121,6 +122,50 @@
         </ActivityAction>
       </ui:ForEachRow.Body>
     </ui:ForEachRow>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box - Results" sap:VirtualizedContainerService.HintSize="620.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;The following Repositories were forked successfully: &quot; + successRepo + vBCrLf + &quot;The Following Repositories were not able to be forked: &quot; + failRepo]" />
+    <If sap2010:Annotation.AnnotationText="Check if there are any repositories that successfully forked and append them to the output string" Condition="[String.IsNullOrEmpty(successRepo)]" DisplayName="If - Repository successfully forked" sap:VirtualizedContainerService.HintSize="620.666666666667,306.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Else>
+        <Assign sap2010:Annotation.AnnotationText="Add the successfully forked repositories to the output string" DisplayName="Assign - to outputString" sap:VirtualizedContainerService.HintSize="262,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[outputString]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[outputString + "The following Repositories were forked successfully: " + vBCrLf + successRepo]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+      </If.Else>
+    </If>
+    <If sap2010:Annotation.AnnotationText="Check if there are any repositories that failed to fork and append them to the output string" Condition="[String.IsNullOrEmpty(failRepo)]" DisplayName="If - Repository failed to fork" sap:VirtualizedContainerService.HintSize="620.666666666667,306.666666666667" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Else>
+        <Assign sap2010:Annotation.AnnotationText="Add the failed repositories to the output string" DisplayName="Assign - to outputString" sap:VirtualizedContainerService.HintSize="262,107.333333333333" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[outputString]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">[outputString +  "The Following Repositories were not able to be forked: "+ vBCrLf + failRepo]</InArgument>
+          </Assign.Value>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Assign>
+      </If.Else>
+    </If>
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box - outputString" sap:VirtualizedContainerService.HintSize="620.666666666667,58.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[outputString]" />
   </Sequence>
 </Activity>
