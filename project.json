@@ -3,7 +3,7 @@
   "description": "An automation using REFramework to fork repositories to newly created organization.",
   "main": "Main.xaml",
   "dependencies": {
-    "Revature_GitHub_ActivityLibrary": "[0.9.0]",
+    "Revature_GitHub_ActivityLibrary": "[1.0.0]",
     "UiPath.Credentials.Activities": "[1.1.6479.13204]",
     "UiPath.Excel.Activities": "[2.9.3]",
     "UiPath.System.Activities": "[20.10.1]",
