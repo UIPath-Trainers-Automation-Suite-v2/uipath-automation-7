@@ -1,6 +1,6 @@
 {
-  "name": "ForkRepositories",
-  "description": "An automation using REFramework to fork repositories to newly created organization.",
+  "name": "Fork GitHub Repositories",
+  "description": "Forks GitHub repositories to a GitHub organization. Requires a valid GitHub account, the name of the organization, and an xlsx/csv file containing the URLs for each repository to fork.",
   "main": "Main.xaml",
   "dependencies": {
     "Revature_GitHub_ActivityLibrary": "[1.0.2]",
